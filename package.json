@@ -1,7 +1,7 @@
 {
   "name": "iugu",
-  "version": "0.0.3",
-  "description": "Iugu API wrapper",
+  "version": "0.0.4",
+  "description": "Biblioteca Iugu para Node.js",
   "homepage": "https://github.com/iugu/iugu-node",
   "author": {
     "name": "Luis Specian",
