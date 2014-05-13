@@ -1,0 +1,32 @@
+{
+  "name": "iugu",
+  "version": "0.0.3",
+  "description": "Iugu API wrapper",
+  "homepage": "https://github.com/iugu/iugu-node",
+  "author": {
+    "name": "Luis Specian",
+    "email": "lspecian@gmail.com",
+    "url": "http://specian.com.br/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iugu/iugu-node.git"
+  },
+  "bugs:": "https://github.com/iugu/iugu-node/issues",
+  "engines": {
+    "node": ">= v0.8.0"
+  },
+  "main": "lib/iugu.js",
+  "devDependencies": {
+    "mocha": "~1.13.0",
+    "chai": "~1.8.0",
+    "chai-as-promised": "~4.0.0",
+    "mocha-as-promised": "~1.4.0"
+  },
+  "dependencies": {
+    "when": "~3.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}

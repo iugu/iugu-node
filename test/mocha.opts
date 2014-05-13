@@ -1,0 +1,4 @@
+--bail
+--recursive
+--debug
+--reporter spec
