@@ -10,15 +10,12 @@ var iugu = require('../lib/iugu')(
 
 var expect = chai.expect;
 
-var CUSTOMER_DETAILS = {
-  description: 'Some customer',
-  card: {
-    number: '4242424242424242',
-    exp_month: 12,
-    exp_year: 2015
-  }
+var CUSTOMER_DATA = {
+  'email': 'email@email.com',
+  'name': 'Nome do Cliente',
+  'notes': 'Anotações Gerais'
 };
-/*
+
 describe('Iugu Module', function() {
 
   var cleanup = new testUtils.CleanupUtility();
@@ -56,26 +53,22 @@ describe('Iugu Module', function() {
 
         var defer = when.defer();
 
-        iugu.customers.create({
-          description: 'Some customer',
-          card: {
-            number: '4242424242424242',
-            exp_month: 12,
-            exp_year: 2015
-          }
-        }, function(err, customer) {
+        iugu.customers.create(CUSTOMER_DATA, 
+        function(err, customer) {
           cleanup.deleteCustomer(customer.id);
           defer.resolve('Called!');
         });
 
         return expect(defer.promise).to.eventually.become('Called!');
       });
-
+/*
       it('Given an error the callback will receive it', function() {
 
         var defer = when.defer();
 
-        iugu.customers.createCard('nonExistentCustId', { card: {} }, function(err, customer) {
+        iugu.marketPlace.create_account({}, function(err, customer) {
+          console.log(err);
+          console.log(customer);
           if (err) {
             defer.resolve('ErrorWasPassed');
           } else {
@@ -85,8 +78,9 @@ describe('Iugu Module', function() {
 
         return expect(defer.promise).to.eventually.become('ErrorWasPassed')
       });
-
+*/
     });
   });
+  
 });
-*/
+

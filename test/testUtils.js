@@ -17,7 +17,7 @@ var utils = module.exports = {
   },
 
   getSpyableIugu: function() {
-    // Provide a testable stripe instance
+    // Provide a testable iugu instance
     // That is, with mock-requests built in and hookable
 
     var Iugu = require('../lib/iugu');
@@ -74,6 +74,7 @@ var utils = module.exports = {
     CleanupUtility.prototype = {
 
       doCleanup: function(done) {
+        console.log('call**************************');
         var cleanups = this._cleanupFns;
         var total = cleanups.length;
         var completed = 0;
@@ -98,26 +99,30 @@ var utils = module.exports = {
       add: function(fn) {
         this._cleanupFns.push(fn);
       },
+      deleteSubscription: function(subscriptionId) {
+        console.log('call+++++++++++++++++++++++');
+        this.add(function() {
+          return this._iugu.subscriptions.del(subscriptionId);
+        });
+      },
+      deleteInvoice: function(invoiceId) {
+        console.log('call+++++++++++++++++++++++');
+        this.add(function() {
+          return this._iugu.invoice.del(invoiceId);
+        });
+      },
       deleteCustomer: function(custId) {
+        console.log('call+++++++++++++++++++++++');
         this.add(function() {
           return this._iugu.customers.del(custId);
         });
       },
       deletePlan: function(pId) {
+        console.log('call+++++++++++++++++++++++');
         this.add(function() {
           return this._iugu.plans.del(pId);
         });
-      },
-      deleteCoupon: function(cId) {
-        this.add(function() {
-          return this._iugu.coupons.del(cId);
-        });
-      },
-      deleteInvoiceItem: function(iiId) {
-        this.add(function() {
-          return this._iugu.invoiceItems.del(iiId);
-        });
-      }
+      }     
     };
 
     return CleanupUtility;

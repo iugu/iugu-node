@@ -10,13 +10,42 @@ var iugu = require('../lib/iugu')(
 
 var expect = chai.expect;
 
-var CUSTOMER_DETAILS = {
-  description: 'Some customer',
-  card: {
-    number: '4242424242424242',
-    exp_month: 12,
-    exp_year: 2015
-  }
+var CUSTOMER_DATA = {
+  'email': 'email@email.com',
+  'name': 'Nome do Cliente',
+  'notes': 'Anotações Gerais'
+};
+
+var PLAN_DATA = {
+  'name': 'Plano Básico',
+  'identifier': 'basic_plan',
+  'interval': '1',
+  'interval_type': 'months',
+  'prices[][currency]': 'BRL',
+  'prices[][value_cents]': '1000',
+  'features[][name]': 'Número de Usuários',
+  'features[][identifier]': 'users',
+  'features[][value]': '10'
+}
+
+var SUBSCRIPTION_DATA = {
+  'plan_identifier': 'basic_plan',
+  'customer_id': '',
+  'only_on_charge_success': 'false',
+  'subitems[][description]': 'Item um',
+  'subitems[][price_cents]': '1000', 
+  'subitems[][quantity]': '1'
+}
+
+var PAYMENT_METHOD_DATA = {
+  'description': 'Meu Cartão de Crédito',
+  'item_type': 'credit_card',
+  'data[number]': '4111111111111111',
+  'data[verification_value]': '123',
+  'data[first_name]': 'Joao',
+  'data[last_name]': 'Silva',
+  'data[month]': '12',
+  'data[year]': '2015'
 };
 
 describe('Flows', function() {
@@ -25,50 +54,31 @@ describe('Flows', function() {
   // default_currency (required in subsequent tests);
 
   var cleanup = new testUtils.CleanupUtility();
-  this.timeout(30000);
+  this.timeout(300);
   
-  describe('create', function() {
-
-    it('Sends the correct request', function() {
-      
-
-    });
-
-  });
-
-  
-/*
   describe('Plan+Subscription flow', function() {
 
     it('Allows me to: Create a plan and subscribe a customer to it', function() {
-
-      return expect(
-        when.join(
-          iugu.plans.create({
-            id: 'plan' + +new Date,
-            amount: 1700,
-            currency: CURRENCY,
-            interval: 'month',
-            name: 'Gold Super Amazing Tier'
-          }),
-          iugu.customers.create(CUSTOMER_DETAILS)
-        ).then(function(j) {
-
-          var plan = j[0];
-          var customer = j[1];
-
-          cleanup.deleteCustomer(customer.id);
-          cleanup.deletePlan(plan.id);
-
-          return iugu.customers.updateSubscription(customer.id, {
-            plan: plan.id
+      
+      iugu.plans.create(PLAN_DATA, function(err, plan) { 
+        iugu.customers.create(CUSTOMER_DATA, function(err, customer) {
+          iugu.customers.createPaymentMethod(customer.id, PAYMENT_METHOD_DATA, function(err, res) {
+            
+            SUBSCRIPTION_DATA.customer_id = customer.id
+            iugu.subscriptions.create(SUBSCRIPTION_DATA, function(err, subscription) {
+              cleanup.deleteInvoice(recent_invoices[0].id);
+              cleanup.deleteSubscription(subscription.id);
+              cleanup.deleteCustomer(customer.id);
+              cleanup.deletePlan(plan.id);
+              
+              return expect(subscription).to.eventually.have.property('suspended', 'false');
+            });          
           });
-
-        })
-      ).to.eventually.have.property('status', 'active');
+        });
+      })
 
     });
-
+/*
     it('Allows me to: Create a plan and subscribe a customer to it, and update subscription (multi-subs API)', function() {
       var plan;
       return expect(
@@ -157,9 +167,9 @@ describe('Flows', function() {
           });
         })
       ).to.eventually.have.property('cancel_at_period_end', true);
-
+*/
     });
-
+/*
     describe('Plan name variations', function() {
       [
         '34535 355453' + +new Date,
