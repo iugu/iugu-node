@@ -1,4 +1,4 @@
-# Iugu para node.js [![Build Status](https://travis-ci.org/lspecian/iugu-node.png?branch=pos-refactor)](https://travis-ci.org/lspecian/iugu-node)
+# Iugu para node.js [![Build Status](https://travis-ci.org/iugu/iugu-node.png?branch=master)](https://travis-ci.org/iugu/iugu-node)
 
 ## Instalação
 
