@@ -83,7 +83,6 @@ iugu.plans.create(PLAN_DATA, function(err, plan) {
   })
 })*/
 
-
 function clearAll() {
   iugu.invoices.list(function(err, res) {
   console.log(err);

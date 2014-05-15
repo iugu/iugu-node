@@ -74,7 +74,6 @@ var utils = module.exports = {
     CleanupUtility.prototype = {
 
       doCleanup: function(done) {
-        console.log('call**************************');
         var cleanups = this._cleanupFns;
         var total = cleanups.length;
         var completed = 0;
@@ -100,25 +99,21 @@ var utils = module.exports = {
         this._cleanupFns.push(fn);
       },
       deleteSubscription: function(subscriptionId) {
-        console.log('call+++++++++++++++++++++++');
         this.add(function() {
           return this._iugu.subscriptions.del(subscriptionId);
         });
       },
       deleteInvoice: function(invoiceId) {
-        console.log('call+++++++++++++++++++++++');
         this.add(function() {
-          return this._iugu.invoice.del(invoiceId);
+          return this._iugu.invoices.del(invoiceId);
         });
       },
       deleteCustomer: function(custId) {
-        console.log('call+++++++++++++++++++++++');
         this.add(function() {
           return this._iugu.customers.del(custId);
         });
       },
       deletePlan: function(pId) {
-        console.log('call+++++++++++++++++++++++');
         this.add(function() {
           return this._iugu.plans.del(pId);
         });

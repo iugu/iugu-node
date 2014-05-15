@@ -54,28 +54,32 @@ describe('Flows', function() {
   // default_currency (required in subsequent tests);
 
   var cleanup = new testUtils.CleanupUtility();
-  this.timeout(300);
+  this.timeout(6000);
   
   describe('Plan+Subscription flow', function() {
 
     it('Allows me to: Create a plan and subscribe a customer to it', function() {
-      
-      iugu.plans.create(PLAN_DATA, function(err, plan) { 
-        iugu.customers.create(CUSTOMER_DATA, function(err, customer) {
-          iugu.customers.createPaymentMethod(customer.id, PAYMENT_METHOD_DATA, function(err, res) {
-            
-            SUBSCRIPTION_DATA.customer_id = customer.id
-            iugu.subscriptions.create(SUBSCRIPTION_DATA, function(err, subscription) {
-              cleanup.deleteInvoice(recent_invoices[0].id);
-              cleanup.deleteSubscription(subscription.id);
-              cleanup.deleteCustomer(customer.id);
-              cleanup.deletePlan(plan.id);
-              
-              return expect(subscription).to.eventually.have.property('suspended', 'false');
-            });          
-          });
-        });
-      })
+      return expect(
+        when.join(iugu.plans.create(PLAN_DATA),
+          iugu.customers.create(CUSTOMER_DATA)
+        ).then(function(j) {
+
+          var plan = j[0];
+          var customer = j[1];
+          SUBSCRIPTION_DATA.customer_id = customer.id;          
+          
+          cleanup.deleteCustomer(customer.id);
+          cleanup.deletePlan(plan.id);
+          return iugu.customers.createPaymentMethod(customer.id, PAYMENT_METHOD_DATA);
+        }).then(function(paymentMethod) {
+          return iugu.subscriptions.create(SUBSCRIPTION_DATA);
+        }).then(function(subscription) {
+          cleanup.deleteInvoice(subscription.recent_invoices[0].id);
+          cleanup.deleteSubscription(subscription.id);
+
+          return [subscription.suspended, subscription.currency];
+        })
+      ).to.eventually.deep.equal([false, 'BRL']);
 
     });
 /*
