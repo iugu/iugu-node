@@ -70,7 +70,7 @@ when.join(
         })
         */
 
-//clearAll();
+clearAll();
 
 /*
 iugu.plans.create(PLAN_DATA, function(err, plan) { 

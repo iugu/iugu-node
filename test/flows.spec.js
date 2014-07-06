@@ -57,7 +57,7 @@ describe('Flows', function() {
   this.timeout(6000);
   
   describe('Plan+Subscription flow', function() {
-
+/*
     it('Allows me to: Create a plan and subscribe a customer to it', function() {
       return expect(
         when.join(iugu.plans.create(PLAN_DATA),
@@ -76,6 +76,38 @@ describe('Flows', function() {
         }).then(function(subscription) {
           cleanup.deleteInvoice(subscription.recent_invoices[0].id);
           cleanup.deleteSubscription(subscription.id);
+
+          return [subscription.suspended, subscription.currency];
+        })
+      ).to.eventually.deep.equal([false, 'BRL']);
+
+    });
+    */
+    it('Allows me to: Create a plan and subscribe a customer to it using bankslip', function() {
+      return expect(
+        when.join(
+          iugu.customers.create(CUSTOMER_DATA)
+        ).then(function(j) {
+
+          var plan = j[0];
+          var customer = j[1];
+          SUBSCRIPTION_DATA.customer_id = plan.id;
+          SUBSCRIPTION_DATA.plan_identifier = 'plano_basico';
+          SUBSCRIPTION_DATA.credits_based = false;
+          //cleanup.deleteCustomer(customer.id);
+          //cleanup.deletePlan(plan.id);
+
+          return iugu.subscriptions.create(SUBSCRIPTION_DATA);
+        }).then(function(subscription) {
+          //cleanup.deleteInvoice(subscription.recent_invoices[0].id);
+          //cleanup.deleteSubscription(subscription.id);
+          SUBSCRIPTION_DATA.credits_cycle = '1000';
+          SUBSCRIPTION_DATA.price_cents = '5000';
+          SUBSCRIPTION_DATA.credits_based = true;
+          return iugu.subscriptions.create(SUBSCRIPTION_DATA);
+        }).then(function(subscription) {
+          //cleanup.deleteInvoice(subscription.recent_invoices[0].id);
+          //cleanup.deleteSubscription(subscription.id);
 
           return [subscription.suspended, subscription.currency];
         })
