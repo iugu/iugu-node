@@ -1,12 +1,12 @@
 'use strict';
 
 var iugu = require('../lib/iugu')(
-  '4bef97b6b36bc0b2c569470b6de9256e',
+  'fa484a7c14ff046c6f1c589d2f0c389b',
   'latest'
 );
 
 
-iugu.setApiKey('4bef97b6b36bc0b2c569470b6de9256e');
+iugu.setApiKey('fa484a7c14ff046c6f1c589d2f0c389b');
 
 
 var CUSTOMER_DATA = {
@@ -32,7 +32,7 @@ var SUBSCRIPTION_DATA = {
   'customer_id': '',
   'only_on_charge_success': 'false',
   'subitems[][description]': 'Item um',
-  'subitems[][price_cents]': '1000', 
+  'subitems[][price_cents]': '1000',
   'subitems[][quantity]': '1'
 }
 
@@ -51,7 +51,7 @@ var PAYMENT_METHOD_DATA = {
 when.join(
           iugu.plans.create(PLAN_DATA),
           iugu.customers.create(CUSTOMER_DATA)
-          
+
         ).then(function(j) {
           var plan = j[0];
           var customer = j[1];
@@ -60,9 +60,9 @@ when.join(
           iugu.customers.createPaymentMethod(customer.id, PAYMENT_METHOD_DATA, function(err, res) {
             console.log(err);
             console.log(res);
-            
+
             SUBSCRIPTION_DATA.customer_id = customer.id
-     
+
             cleanup.deleteCustomer(customer.id);
             cleanup.deletePlan(plan.id);
             return iugu.subscriptions.create(SUBSCRIPTION_DATA);
@@ -70,15 +70,15 @@ when.join(
         })
         */
 
-clearAll();
+//clearAll();
 
 /*
-iugu.plans.create(PLAN_DATA, function(err, plan) { 
+iugu.plans.create(PLAN_DATA, function(err, plan) {
   iugu.customers.create(CUSTOMER_DATA, function(err, customer) {
     iugu.customers.createPaymentMethod(customer.id, PAYMENT_METHOD_DATA, function(err, res) {
       SUBSCRIPTION_DATA.customer_id = customer.id
        iugu.subscriptions.create(SUBSCRIPTION_DATA);
-       
+
     });
   })
 })*/
@@ -90,7 +90,7 @@ function clearAll() {
   res.items.forEach(function (item) {
     iugu.invoices.del(item.id, function(e, r) {
       console.log(e);
-      console.log(r);    
+      console.log(r);
     });
   });
 });
@@ -120,11 +120,12 @@ iugu.plans.list(function(err, res) {
 
 
 }
-/*
+
 console.log('test.js');
+/*
 iugu.token.create(
   {
-    'account_id': '0738d949-27cf-493b-b079-abf045d13e12', 
+    'account_id': '0738d949-27cf-493b-b079-abf045d13e12',
     'test': true,
     'method': 'credit_card',
     'data[number]': '4111111111111111',
@@ -136,27 +137,39 @@ iugu.token.create(
   }, function(err, token) {
   console.log(err);
   console.log(token);
-    var data = { 
-      'email': 'test@test.com', 
-      'items[][description]': 'Item Um', 
-      'items[][quantity]': '1', 
-      'items[][price_cents]': '1099', 
-      'payer[cpf_cnpj]': '12312312312', 
-      'payer[name]': 'Nome do Cliente', 
-      'payer[phone_prefix]': '11', 
-      'payer[phone]': '12121212', 
-      'payer[email]': 'test@test.com', 
-      'payer[address][street]': 'Rua Tal', 
+    var data = {
+      'email': 'test@test.com',
+      'items[][description]': 'Item Um',
+      'items[][quantity]': '1',
+      'items[][price_cents]': '1099',
+      'payer[cpf_cnpj]': '12312312312',
+      'payer[name]': 'Nome do Cliente',
+      'payer[phone_prefix]': '11',
+      'payer[phone]': '12121212',
+      'payer[email]': 'test@test.com',
+      'payer[address][street]': 'Rua Tal',
       'payer[address][number]': '700',
       'payer[address][city]': 'São Paulo',
       'payer[address][state]': 'SP',
       'payer[address][country]': 'Brasil',
       'payer[address][zip_code]': '12122-000'
     };
-    data.token = token.id;
+*/
+    var data = {
+        method: 'bank_slip',
+        email: 'lspecian@gmail.com',
+        'items': [{description: 'Saco de batata',
+                quantity: '1',
+                price_cents: '100'} ,
+                {description: '2 Saco de batata',
+                quantity: '1',
+                price_cents: '100'
+              }]
+    }
+
+    //data.token = token.id;
     iugu.charge.create(data, function(err, res) {
       console.log(err);
       console.log(res);
     });
-});
-*/
+//});
