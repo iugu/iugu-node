@@ -3,7 +3,7 @@
 var iugu = require('../testUtils').getSpyableIugu();
 var expect = require('chai').expect;
 
-describe('Transfers Resource', function() {
+describe('WithDraw Resource', function() {
 
     describe('list', function() {
 

@@ -56,18 +56,19 @@ describe('Account Resource', function() {
 
   });
 
-  describe('request withdraw', function(){
-    it('Sends the correct request', function(){
-      var withdraw = {
-        'amount': '13050'
-      }
-      , accountId = '4bef97b6b36bc0b2c569470b6de9256e';
-
-      iugu.accounts.request_withdraw(accountId, withdraw);
-      expect(iugu.LAST_REQUEST).to.deep.equal({
-        method: 'POST'
-        , url: 'v1/accounts/' + accountId + '/request_withdraw'
-      });
-    });
-  });
+  // call changed to /v1/withdraw_requests
+  //describe('request withdraw', function(){
+  //  it('Sends the correct request', function(){
+  //    var withdraw = {
+  //      'amount': '13050'
+  //    }
+  //    , accountId = '4bef97b6b36bc0b2c569470b6de9256e';
+  //
+  //    iugu.accounts.request_withdraw(accountId, withdraw);
+  //    expect(iugu.LAST_REQUEST).to.deep.equal({
+  //      method: 'POST'
+  //      , url: 'v1/accounts/' + accountId + '/request_withdraw'
+  //    });
+  //  });
+  //});
 });
