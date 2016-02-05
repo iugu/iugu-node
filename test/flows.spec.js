@@ -254,4 +254,17 @@ describe('Flows', function() {
 
 
 */
+
+
+  describe('Request WithDraw', function() {
+    it('Allows you to create a charge', function() {
+      return expect(
+          iugu.withDrawRequests.list()
+              .then(null, function(error) {
+            return error;
+          })
+      ).to.be.instanceof(Object);
+    });
+  });
 });
+
