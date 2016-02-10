@@ -168,8 +168,8 @@ iugu.token.create(
     }
 
     //data.token = token.id;
-    iugu.charge.create(data, function(err, res) {
-      console.log(err);
-      console.log(res);
-    });
+    //iugu.charge.create(data, function(err, res) {
+    //  console.log(err);
+    //  console.log(res);
+    //});
 //});

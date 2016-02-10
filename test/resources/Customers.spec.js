@@ -70,7 +70,7 @@ describe('Customers Resource', function() {
         description: 'Foo "baz"'
       });
       expect(iugu.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
+        method: 'PUT',
         url: '/v1/customers/cus_2dkAb792h1mfa4',
         data: { description: 'Foo "baz"' }
       });

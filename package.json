@@ -1,6 +1,6 @@
 {
   "name": "iugu",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Biblioteca Iugu para Node.js",
   "homepage": "https://github.com/iugu/iugu-node",
   "author": {
@@ -24,6 +24,9 @@
     "mocha-as-promised": "~1.4.0"
   },
   "dependencies": {
+    "continuation-local-storage": "^3.1.4",
+    "request": "^2.67.0",
+    "request-promise": "^1.0.2",
     "when": "~3.1.0"
   },
   "scripts": {

@@ -55,7 +55,7 @@ describe('Iugu Module', function() {
 
         iugu.customers.create(CUSTOMER_DATA, 
         function(err, customer) {
-          cleanup.deleteCustomer(customer.id);
+          cleanup.deleteCustomer(customer.body.id);
           defer.resolve('Called!');
         });
 

@@ -45,7 +45,7 @@ describe('Subscriptions Resource', function() {
         amount: 1900, currency: 'usd'
       });
       expect(iugu.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
+        method: 'PUT',
         url: '/v1/subscriptions/planId3',
         data: { amount: 1900, currency: 'usd' }
       });

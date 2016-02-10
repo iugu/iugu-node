@@ -41,7 +41,7 @@ describe('Invoices Resource', function() {
 
       iugu.invoices.update('invoiceId1', { application_fee: 200 });
       expect(iugu.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
+        method: 'PUT',
         url: '/v1/invoices/invoiceId1',
         data: { application_fee: 200 }
       });
