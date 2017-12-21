@@ -12,7 +12,7 @@ var iugu = require('iugu')('c73d49f9-6490-46ee-ba36-dcf69f6334fd'); // Ache sua 
 Todo método aceita um callback opcional como ultimo argumento:
 
 ```js
-iugu.customer.create({
+iugu.customers.create({
   'email': 'email@email.com',
   'name': 'Nome do Cliente',
   'notes': 'Anotações Gerais'
