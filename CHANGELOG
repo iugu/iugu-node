@@ -1,6 +1,9 @@
+0.1.0 - 07.06.2018
+  - Start publishing fork from https://github.com/iugu/iugu-node/ as iugu-sdk
+
 0.0.4 May 13, 2014
   - Change on npm description
-  
+
 0.0.3 May 13, 2014
   - Refactored to new Architecture
 
