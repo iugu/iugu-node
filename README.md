@@ -2,7 +2,7 @@
 
 ## Instalação
 
-`npm install iugu`
+`npm install iugu-sdk`
 
 ## Exemplo de Uso
 ```js

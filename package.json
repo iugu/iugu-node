@@ -1,18 +1,18 @@
 {
-  "name": "iugu",
-  "version": "0.0.6",
-  "description": "Biblioteca Iugu para Node.js",
-  "homepage": "https://github.com/iugu/iugu-node",
+  "name": "iugu-sdk",
+  "version": "0.1.0",
+  "description": "Iugu SDK for Node.js",
+  "homepage": "https://github.com/menvia/iugu-sdk-javascript",
   "author": {
-    "name": "Luis Specian",
-    "email": "lspecian@gmail.com",
-    "url": "http://specian.com.br/"
+    "name": "menvia",
+    "email": "developer@menvia.com",
+    "url": "http://www.menvia.com/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iugu/iugu-node.git"
+    "url": "https://github.com/menvia/iugu-sdk-javascript.git"
   },
-  "bugs:": "https://github.com/iugu/iugu-node/issues",
+  "bugs:": "https://github.com/menvia/iugu-sdk-javascript/issues",
   "engines": {
     "node": ">= v0.8.0"
   },
@@ -24,6 +24,7 @@
     "mocha-as-promised": "~1.4.0"
   },
   "dependencies": {
+    "request": "^2.83.0",
     "when": "~3.1.0"
   },
   "scripts": {
